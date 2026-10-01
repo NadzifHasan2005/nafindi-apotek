@@ -12,6 +12,8 @@
   justify-content: space-between;
   padding: 0.5cm 1cm;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  position: relative;
+  background-color: white;
 }
 
 .navigation-image a {
@@ -36,6 +38,88 @@
 .navigation-list a:hover,
 .navigation-list a.active {
   color: rgb(4, 52, 212);
+}
+
+/* ===== Hamburger button (disembunyikan di desktop) ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2cm;
+  z-index: 20;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background-color: rgb(10, 62, 234);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Animasi jadi tanda silang saat menu terbuka */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ===== Responsive: tablet & mobile ===== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navigation-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+  }
+
+  .navigation-list.show {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  .navigation-list a {
+    width: 100%;
+    text-align: center;
+    padding: 0.4cm 0;
+  }
+
+  .navigation-list a:hover,
+  .navigation-list a.active {
+    background-color: rgb(240, 244, 255);
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    padding: 0.4cm 0.6cm;
+  }
+
+  .navigation-image a {
+    font-size: 1rem;
+  }
 }
 
 .judul {
@@ -76,15 +160,35 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 /* ===== Langkah Belanja ===== */
+.langkah-judul{
+  background-color: #becbfb;
+  color: #00477d;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 12px;
+}
 .langkah-belanja {
   text-align: center;
-  padding: 1.5cm 1cm;
   background-color: rgb(240, 248, 245);
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #eff6ff 100%);
+  color: #1e293b;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
 .langkah-belanja h2 {
   font-size: 2rem;
   color: rgb(10, 62, 234);
+  margin-top: 0.2cm;
 }
 
 .langkah-belanja .subjudul {
@@ -139,10 +243,682 @@
   color: rgb(90, 90, 90);
   line-height: 1.4;
 }
+/* ===== Kategori Unggulan ===== */
+.kategori-unggulan {
+  text-align: center;
+  padding: 1.5cm 1cm;
+}
+
+.kategori-unggulan h2,
+.kenapa-kami h2,
+.produk-terlaris h2,
+.testimoni h2 {
+  font-size: 2rem;
+  color: rgb(10, 62, 234);
+}
+
+.subjudul {
+  color: rgb(100, 100, 100);
+  margin-bottom: 1cm;
+}
+
+.kategori-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5cm;
+}
+
+.kategori-item {
+  background: white;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 14px;
+  padding: 0.6cm;
+  width: 3.5cm;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.kategori-item:hover {
+  border-color: rgb(10, 62, 234);
+  background-color: rgb(240, 244, 255);
+  transform: translateY(-4px);
+}
+
+.kategori-item-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.2cm;
+}
+
+.kategori-item p {
+  font-size: 0.85rem;
+  color: rgb(67, 66, 66);
+}
+
+/* ===== Kenapa Pilih Kami ===== */
+.kenapa-kami {
+  text-align: center;
+  padding: 1.5cm 1cm;
+  background-color: rgb(240, 248, 245);
+}
+
+.kenapa-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6cm;
+}
+
+.kenapa-item {
+  width: 4.5cm;
+}
+
+.kenapa-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.2cm;
+}
+
+.kenapa-item h3 {
+  color: rgb(10, 62, 234);
+  margin-bottom: 0.2cm;
+}
+
+.kenapa-item p {
+  font-size: 0.85rem;
+  color: rgb(90, 90, 90);
+}
+
+/* ===== Produk Terlaris ===== */
+.produk-terlaris {
+  text-align: center;
+  padding: 1.5cm 1cm;
+}
+
+.produk-terlaris-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5cm;
+  margin-bottom: 0.8cm;
+}
+
+.produk-terlaris-card {
+  background: white;
+  border-radius: 14px;
+  padding: 0.6cm;
+  width: 4cm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: 0.25s;
+}
+
+.produk-terlaris-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.produk-terlaris-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.2cm;
+}
+
+.produk-terlaris-card .harga {
+  color: rgb(10, 62, 234);
+  font-weight: 600;
+}
+
+.button-outline {
+  background: none;
+  border: 2px solid rgb(10, 62, 234);
+  color: rgb(10, 62, 234);
+  padding: 0.25cm 0.8cm;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+.button-outline:hover {
+  background-color: rgb(10, 62, 234);
+  color: white;
+}
+
+/* ===== Banner Konsultasi Apoteker ===== */
+.konsultasi-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5cm;
+  background-color: rgb(10, 62, 234);
+  color: white;
+  padding: 1cm 1.5cm;
+}
+
+.konsultasi-banner h2 {
+  font-size: 1.4rem;
+}
+
+.konsultasi-banner p {
+  opacity: 0.9;
+}
+
+.button-whatsapp {
+  background-color: #25d366;
+  color: white;
+  text-decoration: none;
+  padding: 0.3cm 0.8cm;
+  border-radius: 40px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.button-whatsapp:hover {
+  background-color: #1ebe5b;
+}
+
+/* ===== Testimoni ===== */
+.testimoni {
+  text-align: center;
+  padding: 1.5cm 1cm;
+  background-color: rgb(240, 248, 245);
+}
+
+.testimoni-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5cm;
+}
+
+.testimoni-card {
+  background: white;
+  border-radius: 14px;
+  padding: 0.6cm;
+  width: 5cm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.testimoni-isi {
+  font-style: italic;
+  color: rgb(67, 66, 66);
+  font-size: 0.9rem;
+  margin-bottom: 0.3cm;
+}
+
+.testimoni-nama {
+  color: rgb(10, 62, 234);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ===== Banner Legalitas ===== */
+.legalitas-banner {
+  background-color: rgb(230, 240, 255);
+  text-align: center;
+  padding: 0.4cm;
+  font-size: 0.85rem;
+  color: rgb(10, 62, 234);
+}
+
+/* ===== Footer ===== */
+.footer {
+  background-color: rgb(20, 20, 30);
+  color: rgb(220, 220, 220);
+  padding: 1cm 1.5cm 0.5cm;
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1cm;
+  margin-bottom: 0.8cm;
+}
+
+.footer-col h3 {
+  color: white;
+  margin-bottom: 0.2cm;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 0.2cm;
+  font-size: 0.95rem;
+}
+
+.footer-col p {
+  font-size: 0.85rem;
+  margin-bottom: 0.15cm;
+  cursor: default;
+  color: rgb(190, 190, 190);
+}
+
+.footer-col:last-child p {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.footer-col:last-child p:hover {
+  color: white;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.4cm;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgb(150, 150, 150);
+}
+
+/* ===== Responsive landing page sections ===== */
+@media (max-width: 768px) {
+  .konsultasi-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+  }
+}
 
 
+/* ===== Produk Page ===== */
+.produk-landing {
+  padding: 1.5cm 1cm;
+  background-color: rgb(248, 249, 252);
+  min-height: 80vh;
+}
 
+.produk-header {
+  text-align: center;
+  margin-bottom: 0.8cm;
+}
 
+.produk-header h1 {
+  color: rgb(10, 62, 234);
+  font-size: 2rem;
+}
+
+.produk-header .subjudul {
+  color: rgb(120, 120, 120);
+  font-size: 0.95rem;
+  margin-top: 0.1cm;
+}
+
+/* ===== Toolbar ===== */
+.produk-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4cm;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 0.4cm 0.5cm;
+  max-width: 18cm;
+  margin: 0 auto 0.5cm;
+  box-shadow: 0 2px 12px rgba(10, 62, 234, 0.06);
+}
+
+.produk-search {
+  display: flex;
+  align-items: center;
+  gap: 0.2cm;
+  background: rgb(245, 246, 250);
+  border: 1.5px solid transparent;
+  border-radius: 40px;
+  padding: 0.2cm 0.5cm;
+  min-width: 6cm;
+  flex: 1;
+  transition: 0.2s;
+}
+
+.produk-search:focus-within {
+  border-color: rgb(10, 62, 234);
+  background: white;
+}
+
+.produk-search input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.produk-toolbar select {
+  padding: 0.2cm 0.4cm;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 40px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  background: rgb(245, 246, 250);
+  cursor: pointer;
+  color: rgb(67, 66, 66);
+  transition: 0.2s;
+}
+
+.produk-toolbar select:hover,
+.produk-toolbar select:focus {
+  border-color: rgb(10, 62, 234);
+  outline: none;
+  background: white;
+}
+
+.produk-reset {
+  background-color: #fbbebe;
+  color: #990000;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.produk-reset:hover {
+  background-color: #f8a4a4;
+}
+
+/* ===== Chip kategori cepat ===== */
+.produk-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25cm;
+  margin-bottom: 0.8cm;
+}
+
+.produk-chip {
+  background: white;
+  border: 1px solid rgb(220, 220, 220);
+  color: rgb(67, 66, 66);
+  padding: 0.15cm 0.5cm;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.produk-chip:hover {
+  border-color: rgb(10, 62, 234);
+  color: rgb(10, 62, 234);
+}
+
+.produk-chip.active {
+  background-color: rgb(10, 62, 234);
+  border-color: rgb(10, 62, 234);
+  color: white;
+  box-shadow: 0 3px 10px rgba(10, 62, 234, 0.3);
+}
+
+/* ===== Status (loading / kosong) ===== */
+.produk-status {
+  text-align: center;
+  color: rgb(100, 100, 100);
+  padding: 1cm;
+}
+
+.produk-kosong {
+  text-align: center;
+  padding: 1.5cm;
+  color: rgb(100, 100, 100);
+  max-width: 10cm;
+  margin: 0 auto;
+}
+
+.produk-kosong p {
+  margin-bottom: 0.4cm;
+  font-size: 1.1rem;
+}
+
+/* ===== Grid produk ===== */
+.produk-kategori {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5cm;
+  max-width: 24cm;
+  margin: 0 auto;
+}
+
+.kategori-card {
+  background: white;
+  border-radius: 14px;
+  padding: 0.6cm;
+  width: 4.5cm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgb(240, 240, 240);
+  transition: 0.25s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.kategori-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  border-color: rgb(220, 230, 255);
+}
+
+.kategori-card h2 {
+  font-size: 1rem;
+  margin: 0.3cm 0 0.15cm;
+  color: rgb(40, 40, 40);
+}
+
+.produk-deskripsi {
+  font-size: 0.8rem;
+  color: rgb(120, 120, 120);
+  margin-bottom: 0.2cm;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.produk-harga {
+  color: rgb(10, 62, 234);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.produk-stok {
+  font-size: 0.75rem;
+  color: rgb(140, 140, 140);
+  margin-bottom: 0.3cm;
+}
+
+/* ===== Kartu Produk ===== */
+.produk-kategori {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6cm;
+  max-width: 24cm;
+  margin: 0 auto;
+}
+
+.kategori-card {
+  background: white;
+  border-radius: 16px;
+  width: 4.8cm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgb(240, 240, 240);
+  transition: 0.25s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* kunci: gambar ikut membulat sesuai radius card */
+}
+
+.kategori-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(10, 62, 234, 0.12);
+  border-color: rgb(220, 230, 255);
+}
+
+/* ===== Gambar Produk ===== */
+.produk-gambar-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* rasio persegi, konsisten di semua card */
+  background-color: rgb(245, 246, 250);
+  overflow: hidden;
+}
+
+.produk-gambar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;  /* fokus ke bagian atas foto, biar wajah tidak terpotong */
+  display: block;
+  transition: transform 0.3s;
+}
+
+.kategori-card:hover .produk-gambar {
+  transform: scale(1.06);
+}
+
+.produk-gambar-kosong {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: rgb(190, 190, 190);
+}
+
+/* ===== Badge golongan obat (menempel rapi di atas gambar) ===== */
+.produk-badge {
+  position: absolute;
+  top: 0.3cm;
+  left: 0.3cm;
+  font-size: 0.62rem;
+  padding: 0.1cm 0.3cm;
+  border-radius: 40px;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.badge-hijau { background-color: #2e9e4f; }
+.badge-biru { background-color: #1a73e8; }
+.badge-merah { background-color: #d32f2f; }
+
+/* ===== Konten teks di bawah gambar ===== */
+.kategori-card h2 {
+  font-size: 0.95rem;
+  line-height: 1.3;
+  margin: 0.3cm 0.35cm 0.1cm;
+  color: rgb(30, 30, 30);
+  font-weight: 600;
+
+  /* potong nama produk jadi max 1 baris, cegah card melar */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.produk-deskripsi {
+  font-size: 0.75rem;
+  color: rgb(140, 140, 140);
+  margin: 0 0.35cm 0.2cm;
+  line-height: 1.4;
+
+  /* potong deskripsi jadi max 2 baris */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.produk-harga {
+  color: rgb(10, 62, 234);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0.35cm 0.05cm;
+}
+
+.produk-stok {
+  font-size: 0.72rem;
+  color: rgb(150, 150, 150);
+  margin: 0 0.35cm 0.3cm;
+}
+
+/* ===== Tombol di kartu produk ===== */
+.kategori-card .button,
+.kategori-card .button-outline {
+  width: calc(100% - 0.7cm);
+  margin: 0 0.35cm 0.35cm;
+  text-align: center;
+  font-size: 0.82rem;
+  padding: 0.25cm 0;
+  border-radius: 40px;
+}
+
+.kategori-card .button {
+  background-color: rgb(10, 62, 234);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.kategori-card .button:hover:not(:disabled) {
+  background-color: rgb(4, 52, 212);
+}
+
+.kategori-card .button-outline {
+  background: white;
+  border: 1.5px solid rgb(10, 62, 234);
+  color: rgb(10, 62, 234);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.kategori-card .button-outline:hover:not(:disabled) {
+  background: rgb(10, 62, 234);
+  color: white;
+}
+
+.kategori-card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgb(210, 210, 210) !important;
+  border-color: rgb(210, 210, 210) !important;
+  color: white !important;
+}
+
+.kategori-card.stok-habis {
+  opacity: 0.65;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .kategori-card {
+    width: calc(50% - 0.3cm);
+  }
+}
+
+@media (max-width: 480px) {
+  .kategori-card {
+    width: 100%;
+  }
+
+  .produk-gambar-wrapper {
+    aspect-ratio: 16 / 9; /* di HP, gambar dibuat lebih landscape biar tidak makan tempat */
+  }
+}
 
 
 
@@ -393,4 +1169,177 @@
 }
 .admin-page td button:hover {
   background-color: rgb(180, 30, 30);
+}
+
+/* ===== Form Tambah/Edit Produk ===== */
+.admin-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45cm;
+  max-width: 11cm;
+  margin-bottom: 1cm;
+  background: white;
+  padding: 0.9cm;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(10, 62, 234, 0.07);
+  border: 1px solid rgb(240, 242, 248);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15cm;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgb(60, 60, 60);
+}
+
+.admin-page input,
+.admin-page textarea,
+.admin-page select {
+  padding: 0.3cm 0.4cm;
+  border: 1.5px solid rgb(225, 225, 225);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: rgb(40, 40, 40);
+  background: rgb(250, 250, 252);
+  transition: 0.2s;
+}
+
+.admin-page input:hover,
+.admin-page textarea:hover,
+.admin-page select:hover {
+  border-color: rgb(200, 210, 240);
+}
+
+.admin-page input:focus,
+.admin-page textarea:focus,
+.admin-page select:focus {
+  outline: none;
+  border-color: rgb(10, 62, 234);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(10, 62, 234, 0.1);
+}
+.admin-page textarea {
+  resize: vertical;
+  min-height: 1.8cm;
+}
+/* ===== Tambahan untuk preview gambar di form Edit ===== */
+.upload-ket {
+  font-size: 0.72rem;
+  color: rgb(10, 62, 234);
+  margin-top: 0.15cm;
+  text-align: center;
+}
+
+.ganti-gambar-btn {
+  display: block;
+  text-align: center;
+  margin-top: 0.2cm;
+  font-size: 0.78rem;
+  color: rgb(10, 62, 234);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ===== Baris 2 kolom (harga/stok, kategori) ===== */
+.form-row {
+  display: flex;
+  gap: 0.4cm;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* ===== Checkbox wajib resep ===== */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.25cm;
+  background: rgb(255, 248, 235);
+  border: 1px solid rgb(250, 220, 170);
+  border-radius: 10px;
+  padding: 0.3cm 0.4cm;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgb(140, 100, 20);
+}
+
+.form-checkbox input {
+  width: 0.45cm;
+  height: 0.45cm;
+  accent-color: rgb(10, 62, 234);
+  cursor: pointer;
+}
+
+/* ===== Tombol aksi ===== */
+.form-actions {
+  display: flex;
+  gap: 0.3cm;
+  margin-top: 0.2cm;
+}
+
+.btn-simpan {
+  flex: 1;
+  background: linear-gradient(135deg, rgb(10, 62, 234), rgb(4, 45, 190));
+  color: white;
+  border: none;
+  padding: 0.35cm;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 12px rgba(10, 62, 234, 0.25);
+}
+
+.btn-simpan:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 62, 234, 0.35);
+}
+
+.btn-simpan:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-batal {
+  background: rgb(245, 246, 250);
+  color: rgb(90, 90, 90);
+  border: 1.5px solid rgb(225, 225, 225);
+  padding: 0.35cm 0.6cm;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-batal:hover {
+  background: rgb(235, 236, 240);
+  border-color: rgb(200, 200, 200);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .admin-page form {
+    padding: 0.6cm;
+    border-radius: 14px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0.45cm;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
 }
